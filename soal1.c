@@ -7,4 +7,53 @@
  * 
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+typedef struct Node {
+    char id[50];
+    int durasi;
+    struct Node* next;
+} Node;
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    
+    Node *head = NULL;
+    Node *temp = NULL;
+
+    for (int i = 0; i<n; i++){
+        Node* newNode = (Node*)malloc(sizeof(Node));
+        scanf ("%s %d", newNode->id, &newNode->durasi);
+        newNode->next = NULL;
+        if (head == NULL) {
+            head = newNode;
+            temp = newNode;
+        } else {
+            temp->next = newNode;
+            temp = newNode;
+        }
+    }
+
+    printf("ORDER");
+
+    Node *x = head;
+    int a = 0;
+    int b = 0;
+
+    for (int i = 0; i <n; i++){
+        printf(" %s",x->id);
+        a += b;
+        b += x->durasi;
+        
+        Node *temp = x;
+        x = x->next;
+        free (temp);
+    }
+
+    printf("\n");
+    printf("WAIT %d\n",a);
+    return 0;
+}
